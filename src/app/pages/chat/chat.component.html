@@ -1,0 +1,24 @@
+<div class="row video-area">
+  <div class="col d-flex align-items-center justify-content-center">
+    <div class="indicator text-center">
+      <img class="user-avatar shadow-lg animated bounce infinite medium" src="assets/images/user.svg" alt="User image">
+      <p class="text-light mt-3">Calling</p>
+    </div>
+  </div>
+</div>
+
+<div class="row fixed-bottom button-area">
+  <div class="col-lg-4 offset-lg-4 col-12">
+    <div class="row mb-4 mt-4">
+      <div *ngIf="status === Status.CALLING || status === Status.CALL_CONNECTED" class="col-6 offset-3 pl-4 pr-4">
+        <button class="btn btn-danger btn-block btn-reject" (click)="endCall()"><i class="fas fa-phone-slash"></i></button>
+      </div>
+      <div *ngIf="status === Status.RECEIVING" class="col pl-4">
+        <button class="btn btn-success btn-block btn-accept" (click)="answerCall()"><i class="fas fa-phone"></i></button>
+      </div>
+      <div *ngIf="status === Status.RECEIVING" class="col pr-4">
+        <button class="btn btn-danger btn-block btn-reject" (click)="endCall()"><i class="fas fa-phone-slash"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

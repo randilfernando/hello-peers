@@ -1,0 +1,15 @@
+<div class="row contacts-area pt-4 pb-4">
+  <div *ngIf="status === Status.OPEN || status === Status.IDLE" class="col-lg-6 offset-lg-3 col-12 scroll-area">
+    <div *ngFor="let peer of peers" class="row contact mb-3 shadow-lg" (click)="selectPeer(peer)">
+      <div class="col-4 text-center">
+        <img class="user-avatar mt-3 mb-3" src="assets/images/user.svg" alt="User image">
+      </div>
+      <div class="col-8">
+        <div class="mt-4">
+          <h4 class="text-light">{{peer.name}}</h4>
+          <p class="text-white-50">{{peer.email}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

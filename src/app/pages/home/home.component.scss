@@ -1,0 +1,25 @@
+.contacts-area {
+  height: 100vh;
+
+  .scroll-area {
+    height: 100%;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: rgba(0,0,0,0.3);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(255,255,255,0.7);
+    }
+  }
+}
+
+.contact {
+  background: rgba(255,255,255,0.3);
+}
+
+.user-avatar {
+  width: 75px;
+}

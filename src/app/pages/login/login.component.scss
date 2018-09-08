@@ -1,0 +1,35 @@
+.user-avatar {
+  width: 100px;
+  height: auto;
+  margin-top: 100px;
+  border-radius: 50px;
+}
+
+.form-control {
+  border: none;
+  border-radius: 0;
+  height: 40px;
+  box-shadow: none;
+}
+
+.input-group-prepend {
+  border: none;
+  background: white;
+
+  .input-group-text {
+    border: none;
+    background: white;
+  }
+}
+
+.btn {
+  border: none;
+  border-radius: 0;
+  color: white;
+  background: rgba(0,0,0, 0.5);
+  padding: 10px;
+
+  &:hover {
+    background: rgba(0,0,0, 0.2);
+  }
+}
