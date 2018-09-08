@@ -25,7 +25,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "lib/peer.min.js"
+            ]
           },
           "configurations": {
             "production": {
