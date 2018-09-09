@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
-import {PeerType} from "../types/peerType";
 import {VideoService} from "./video.service";
 
 declare let Peer: any;
@@ -65,6 +64,15 @@ export class ChatService {
 
     peer.on('call', call => {
       this.call = call;
+
+      this.call.on('close', () => {
+        this.call = null;
+        this.remoteStream = null;
+        this.videoService.closeVideoStream();
+        this.state.next(Status.CALL_DISCONNECTED);
+        this.state.next(Status.IDLE);
+      });
+
       this.state.next(Status.RECEIVING);
     });
 
@@ -132,14 +140,6 @@ export class ChatService {
       this.call.on('stream', remoteStream => {
         this.remoteStream = remoteStream;
         this.state.next(Status.CALL_CONNECTED);
-      });
-
-      this.call.on('close', () => {
-        this.call = null;
-        this.remoteStream = null;
-        this.videoService.closeVideoStream();
-        this.state.next(Status.CALL_DISCONNECTED);
-        this.state.next(Status.IDLE);
       });
     }
   }

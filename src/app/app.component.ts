@@ -22,6 +22,10 @@ export class AppComponent {
         this.router.navigate(['/home']);
       } else if (status === Status.RECEIVING) {
         this.router.navigate(['/chat']);
+      } else if (status === Status.DISCONNECTED) {
+        this.chatService.reconnect();
+      } else if (status === Status.CLOSE) {
+        this.router.navigate(['/login']);
       }
     });
 
