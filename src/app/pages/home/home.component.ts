@@ -4,6 +4,7 @@ import {PeerService} from "../../services/peer.service";
 import {ChatService, Status} from "../../services/chat.service";
 import {Router} from "@angular/router";
 import {VideoService} from "../../services/video.service";
+import {IMAGES} from "../../constants/assets.constants";
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,8 @@ import {VideoService} from "../../services/video.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  IMAGES = IMAGES;
 
   Status = Status;
   status: Status;
@@ -33,8 +36,7 @@ export class HomeComponent implements OnInit {
 
   async selectPeer(peer: PeerType) {
     const mediaStream = await this.videoService.openVideoStream();
-    this.chatService.selectPeer(peer);
-    this.chatService.makeCall(mediaStream);
+    this.chatService.makeCall(peer.username, mediaStream);
     this.router.navigate(['/chat'])
   }
 

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ChatService, Status} from "../../services/chat.service";
 import {VideoService} from "../../services/video.service";
 import {Router} from "@angular/router";
+import {IMAGES} from "../../constants/assets.constants";
 
 @Component({
   selector: 'app-chat',
@@ -9,6 +10,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
+
+  IMAGES = IMAGES;
 
   Status = Status;
   status: Status = Status.IDLE;

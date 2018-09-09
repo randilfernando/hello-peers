@@ -1,3 +1,31 @@
-<p>
-  register works!
-</p>
+<div class="row">
+  <div class="col-lg-4 offset-lg-4 col-12 text-center">
+    <img class="user-avatar shadow-lg" src="{{IMAGES.USER_AVATAR}}" alt="User image">
+
+    <div class="input-group mt-5 mb-3 shadow-lg">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-user"></i></span>
+      </div>
+      <input type="text" class="form-control" id="usernameInput" name="usernameInput" placeholder="Enter username"
+             [(ngModel)]="peer.username">
+    </div>
+
+    <div class="input-group mb-3 shadow-lg">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+      </div>
+      <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Enter email"
+             [(ngModel)]="peer.email">
+    </div>
+
+    <div class="input-group mb-3 shadow-lg">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+      </div>
+      <input type="password" class="form-control" id="passwordInput" name="passwordInput" placeholder="Password"
+             [(ngModel)]="peer.password">
+    </div>
+
+    <button class="btn mt-4 btn-block shadow-lg" (click)="register()">Register</button>
+  </div>
+</div>

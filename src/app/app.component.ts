@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ChatService, Status} from "./services/chat.service";
 import {Router} from "@angular/router";
+import {LOCAL_STORAGE} from "./constants/storage.constants";
 
 @Component({
   selector: 'app-root',
@@ -23,5 +24,11 @@ export class AppComponent {
         this.router.navigate(['/chat']);
       }
     });
+
+    if (localStorage.getItem(LOCAL_STORAGE.MY_PEER)) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/register'])
+    }
   }
 }

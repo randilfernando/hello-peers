@@ -26,7 +26,6 @@ export class ChatService {
   private peer: any;
   private call: any;
   private remoteStream: any;
-  private selectedPeer: PeerType;
 
   private state = new BehaviorSubject<Status>(Status.UNKNOWN);
   public state$ = this.state.asObservable();
@@ -41,7 +40,7 @@ export class ChatService {
       this.close();
     }
 
-    const peer = new Peer({
+    const peer = new Peer(id, {
       host: 'hello-peers.herokuapp.com',
       port: ''
     });
@@ -50,18 +49,18 @@ export class ChatService {
       this.peer = peer;
       this.call = null;
       this.remoteStream = null;
-      this.selectedPeer = null;
+      this.videoService.closeVideoStream();
       this.state.next(Status.OPEN);
       this.state.next(Status.IDLE);
     });
 
-    peer.on('error', () => {
+    peer.on('error', (err) => {
       this.call = null;
       this.remoteStream = null;
-      this.selectedPeer = null;
       this.videoService.closeVideoStream();
       this.state.next(Status.ERROR);
       this.state.next(Status.IDLE);
+      console.error(err);
     });
 
     peer.on('call', call => {
@@ -73,14 +72,14 @@ export class ChatService {
       this.peer = null;
       this.call = null;
       this.remoteStream = null;
-      this.selectedPeer = null;
+      this.videoService.closeVideoStream();
       this.state.next(Status.CLOSE);
     });
 
     peer.on('disconnected', () => {
       this.call = null;
       this.remoteStream = null;
-      this.selectedPeer = null;
+      this.videoService.closeVideoStream();
       this.state.next(Status.DISCONNECTED);
     })
   }
@@ -97,13 +96,9 @@ export class ChatService {
     this.peer.destroy();
   }
 
-  public selectPeer(peer: PeerType) {
-    this.selectedPeer = peer;
-  }
-
-  public makeCall(mediaStream: any) {
-    if (!this.call && this.selectedPeer) {
-      this.call = this.peer.call(this.selectedPeer.email, mediaStream);
+  public makeCall(id: string, mediaStream: any) {
+    if (!this.call) {
+      this.call = this.peer.call(id, mediaStream);
       this.state.next(Status.CALLING);
 
       this.call.on('stream', remoteStream => {
@@ -124,6 +119,7 @@ export class ChatService {
   public endCall() {
     if (this.call) {
       this.call.close();
+      this.videoService.closeVideoStream();
       this.state.next(Status.CALL_DISCONNECTED);
       this.state.next(Status.IDLE);
     }

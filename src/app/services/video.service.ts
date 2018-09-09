@@ -19,10 +19,12 @@ export class VideoService {
   }
 
   public async closeVideoStream(): Promise<any> {
-    this.mediaStream.getTracks().forEach(track => track.stop());
+    if (this.mediaStream) {
+      this.mediaStream.getTracks().forEach(track => track.stop());
+    }
   }
 
-  private getUserMedia(options: {audio: boolean, video: boolean}): Promise<any> {
+  private getUserMedia(options: { audio: boolean, video: boolean }): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       navigator.getUserMedia(options, function (s) {
         resolve(s);

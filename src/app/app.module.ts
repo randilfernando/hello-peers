@@ -14,9 +14,9 @@ import {FormsModule} from "@angular/forms";
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'chat', component: ChatComponent},
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: 'chat', component: ChatComponent}
 ];
 
 @NgModule({
